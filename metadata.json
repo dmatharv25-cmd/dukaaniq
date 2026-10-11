@@ -1,0 +1,6 @@
+{
+  "name": "DukaanIQ - Kirana Inventory & Waste Monitor",
+  "description": "Modern inventory management, expiry tracking, and valuation dashboard for Indian kirana grocery stores.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
