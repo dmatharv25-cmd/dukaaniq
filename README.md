@@ -74,3 +74,17 @@ Headers: `date` (YYYY-MM-DD), `product` (name or ID), `quantity`, and optional `
 
 The 445 demo sales transactions are synthetic and are labeled as such in the app. They exist only to demonstrate and test the forecasting engine.
 
+
+## Limitations & Future Work
+
+**Current limitations**
+- All 445 demo sales are synthetic, so forecast accuracy has not been validated on real store data.
+- Model evaluation uses a single 7-day chronological holdout, which is a small sample. WAPE is unstable for slow-moving items.
+- The forecast uses day-of-week seasonality only. It does not model promotions, festivals or price changes.
+- Data is stored in the browser, with no backend, login or multi-device sync.
+
+**Planned work**
+- Waste-risk predictor: combine the 7-day forecast with expiry dates to flag stock unlikely to sell before it expires.
+- Validate the models on a public retail dataset or anonymised data from a real kirana store.
+- Add persistent storage with user accounts.
+- Hindi/English interface and CSV export of forecasts.
