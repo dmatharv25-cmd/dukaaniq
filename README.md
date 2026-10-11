@@ -22,6 +22,27 @@ A client-side web app for Indian kirana stores that tracks inventory, flags expi
 - Comparison against a 7-day moving-average baseline using MAE, RMSE and WAPE
 - Reorder recommendation: `max(0, lead time demand + safety stock - current stock)`, with adjustable lead time and safety days
 
+## Screenshots
+
+**Dashboard: valuation, low-stock and expiry alerts**
+
+![Dashboard](docs/dashboard.png)
+
+**Demand intelligence: store-wide outlook and stockout risk**
+
+![Demand intelligence](docs/demand.png)
+
+**7-day forecast for a selected product**
+
+![Forecast](docs/forecast.png)
+
+**Reorder recommendation and model validation (seasonal vs SMA-7 baseline)**
+
+![Reorder and validation](docs/reorder.png)
+
+**Sales ledger with CSV import and synthetic-data labels**
+
+![Sales ledger](docs/sales.png)
 ## Tech stack
 
 React 19, TypeScript, Vite, Tailwind CSS. All forecasting runs in the browser, with no backend.
@@ -52,3 +73,4 @@ Headers: `date` (YYYY-MM-DD), `product` (name or ID), `quantity`, and optional `
 ## Note on data
 
 The 445 demo sales transactions are synthetic and are labeled as such in the app. They exist only to demonstrate and test the forecasting engine.
+
