@@ -89,9 +89,9 @@ The 445 demo sales transactions are synthetic and are labeled as such in the app
 - Data is stored in the browser, with no backend, login or multi-device sync.
 
 **Planned work**
-- Waste-risk predictor: combine the 7-day forecast with expiry dates to flag stock unlikely to sell before it expires.
 - Validate the models on a public retail dataset or anonymised data from a real kirana store.
 - Add persistent storage with user accounts.
 - Hindi/English interface and CSV export of forecasts.
+
 
 
