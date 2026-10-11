@@ -1,5 +1,7 @@
 ﻿# DukaanIQ: Kirana Inventory & Food-Waste Monitor
 
+[![CI](https://github.com/dmatharv25-cmd/dukaaniq/actions/workflows/ci.yml/badge.svg)](https://github.com/dmatharv25-cmd/dukaaniq/actions/workflows/ci.yml)
+
 **Live demo:** https://dukaaniq-beige.vercel.app/
 
 A client-side web app for Indian kirana stores that tracks inventory, flags expiring stock, and forecasts demand so shopkeepers can reorder the right quantity at the right time.
