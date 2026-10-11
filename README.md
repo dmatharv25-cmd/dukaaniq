@@ -20,6 +20,7 @@ A client-side web app for Indian kirana stores that tracks inventory, flags expi
 - 7-day demand forecast using day-of-week seasonal smoothing
 - Chronological train/test split (no future data leakage)
 - Comparison against a 7-day moving-average baseline using MAE, RMSE and WAPE
+- Waste-risk predictor: compares forecast demand with each product's expiry date to estimate units and rupee value likely to go unsold
 - Reorder recommendation: `max(0, lead time demand + safety stock - current stock)`, with adjustable lead time and safety days
 
 ## Screenshots
@@ -43,6 +44,10 @@ A client-side web app for Indian kirana stores that tracks inventory, flags expi
 **Sales ledger with CSV import and synthetic-data labels**
 
 ![Sales ledger](docs/sales.png)
+**Waste-risk predictor: forecast demand vs expiry date**
+
+![Waste risk](docs/waste-risk.png)
+
 ## Tech stack
 
 React 19, TypeScript, Vite, Tailwind CSS. All forecasting runs in the browser, with no backend.
@@ -64,7 +69,7 @@ Then open http://localhost:3000.
 npm test
 ```
 
-Runs 80 automated checks covering forecasting, error metrics, reorder logic and CSV validation.
+Runs 86 automated checks covering forecasting, error metrics, reorder logic and CSV validation.
 
 ## Sales CSV format
 
@@ -88,3 +93,4 @@ The 445 demo sales transactions are synthetic and are labeled as such in the app
 - Validate the models on a public retail dataset or anonymised data from a real kirana store.
 - Add persistent storage with user accounts.
 - Hindi/English interface and CSV export of forecasts.
+
