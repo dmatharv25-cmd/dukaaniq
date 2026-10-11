@@ -1,5 +1,7 @@
 ﻿# DukaanIQ: Kirana Inventory & Food-Waste Monitor
 
+**Live demo:** https://dukaaniq-beige.vercel.app/
+
 A client-side web app for Indian kirana stores that tracks inventory, flags expiring stock, and forecasts demand so shopkeepers can reorder the right quantity at the right time.
 
 ## Features
