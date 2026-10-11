@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import {
   TrendingUp,
   AlertTriangle,
@@ -16,6 +16,7 @@ import { Product } from '../types/inventory';
 import { SaleTransaction, ProductForecast } from '../types/demand';
 import { buildProductForecast } from '../utils/forecasting';
 import { formatINR } from '../utils/formatters';
+import { calculateWasteRisk } from '../utils/wasteRisk';
 
 interface DemandIntelligenceViewProps {
   products: Product[];
@@ -498,6 +499,64 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
                 </p>
               </div>
 
+              {/* Card: Waste Risk (forecast demand vs expiry date) */}
+              {(() => {
+                const prod = products.find((p) => p.id === currentForecast.productId);
+                if (!prod) return null;
+                const risk = calculateWasteRisk(prod, currentForecast);
+                const styles = {
+                  expired: { label: 'Expired', cls: 'bg-red-100 text-red-800 border border-red-300' },
+                  high: { label: 'High Waste Risk', cls: 'bg-red-100 text-red-800 border border-red-300' },
+                  medium: { label: 'Medium Risk', cls: 'bg-amber-100 text-amber-800 border border-amber-300' },
+                  low: { label: 'Low Risk', cls: 'bg-yellow-100 text-yellow-800 border border-yellow-300' },
+                  none: { label: 'No Waste Expected', cls: 'bg-emerald-100 text-emerald-800 border border-emerald-300' },
+                  unknown: { label: 'Not Enough Data', cls: 'bg-slate-100 text-slate-700 border border-slate-300' },
+                }[risk.level];
+                return (
+                  <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <AlertTriangle className="w-4 h-4 text-amber-600" />
+                        <span className="font-bold text-slate-900 text-xs uppercase tracking-wide">
+                          Waste Risk (Forecast vs Expiry)
+                        </span>
+                      </div>
+                      <span className={'px-2 py-0.5 rounded-full text-[10px] font-bold ' + styles.cls}>
+                        {styles.label}
+                      </span>
+                    </div>
+                    <div className="p-3 bg-white rounded-lg border border-slate-200 font-mono text-[11px] text-slate-800 space-y-1">
+                      <div className="flex justify-between">
+                        <span>Days until expiry:</span>
+                        <strong className="tabular-nums">{risk.daysUntilExpiry}</strong>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Current stock:</span>
+                        <strong className="tabular-nums">{prod.quantity} units</strong>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Expected demand until expiry:</span>
+                        <strong className="tabular-nums">{risk.expectedDemandUntilExpiry} units</strong>
+                      </div>
+                      <div className="pt-1.5 border-t border-slate-200 flex justify-between font-bold">
+                        <span>Units at risk of waste:</span>
+                        <span className="tabular-nums">{risk.unitsAtRisk} ({risk.percentAtRisk}%)</span>
+                      </div>
+                      <div className="flex justify-between font-bold">
+                        <span>Value at risk (cost):</span>
+                        <span className="tabular-nums">{formatINR(risk.valueAtRisk)}</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">{risk.suggestion}</p>
+                    {risk.usedExtrapolation && (
+                      <p className="text-[10px] text-slate-500">
+                        Note: expiry is beyond the 7-day forecast, so demand after day 7 assumes the average forecast rate continues.
+                      </p>
+                    )}
+                  </div>
+                );
+              })()}
+
               {/* Card 2: Model Performance & Accuracy Metrics */}
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
                 <div className="flex items-center justify-between">
@@ -592,3 +651,4 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
     </div>
   );
 };
+
