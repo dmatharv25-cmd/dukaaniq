@@ -43,8 +43,8 @@ A client-side web app for Indian kirana stores that tracks inventory, flags expi
 React 19, TypeScript, Vite, Tailwind CSS. All forecasting runs in the browser, with no backend.
 
 
-
-\## Run locally
+```
+## Run locally
 
 
 
@@ -56,19 +56,19 @@ Requires Node.js.
 
 &#x20;   npm run dev
 
-
+```
 
 Then open http://localhost:3000.
 
 
-
+```
 \## Tests
 
 
 
 &#x20;   npm test
 
-
+```
 
 Runs 80 automated checks covering forecasting, error metrics, reorder logic and CSV validation.
 
@@ -78,7 +78,7 @@ Runs 80 automated checks covering forecasting, error metrics, reorder logic and 
 
 
 
-Headers: `date` (YYYY-MM-DD), `product` (name or ID), `quantity`, and optional `unit\_price`. An example file can be downloaded from the import dialog.
+Headers: `date` (YYYY-MM-DD), `product` (name or ID), `quantity`, and optional `unit\\\_price`. An example file can be downloaded from the import dialog.
 
 
 
