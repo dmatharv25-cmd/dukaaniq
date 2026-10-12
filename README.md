@@ -69,7 +69,7 @@ Then open http://localhost:3000.
 npm test
 ```
 
-Runs 86 automated checks covering forecasting, error metrics, reorder logic, waste-risk prediction and CSV validation.
+Runs 91 automated checks covering forecasting, error metrics, reorder logic, waste-risk prediction and CSV validation.
 
 ## Sales CSV format
 
@@ -92,6 +92,7 @@ The 445 demo sales transactions are synthetic and are labeled as such in the app
 - Validate the models on a public retail dataset or anonymised data from a real kirana store.
 - Add persistent storage with user accounts.
 - Hindi/English interface and CSV export of forecasts.
+
 
 
 
