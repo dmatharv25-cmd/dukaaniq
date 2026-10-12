@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -638,7 +638,7 @@ export default function App() {
       <footer className="border-t border-slate-200 bg-white py-4 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
           <div>
-            <strong>DukaanIQ</strong> — AI Inventory, Demand Forecasting & Food-Waste Monitoring for Kiranas.
+            <strong>DukaanIQ</strong> — Inventory, Demand Forecasting & Food-Waste Monitoring for Kiranas.
           </div>
           <div className="flex items-center gap-3">
             <span>BTech CSE Final Project</span>
@@ -710,3 +710,4 @@ export default function App() {
     </div>
   );
 }
+

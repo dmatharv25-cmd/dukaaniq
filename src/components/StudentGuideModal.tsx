@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { X, Code2, Database, Calculator, GitBranch, CheckCircle2, Cpu } from 'lucide-react';
 
 interface StudentGuideModalProps {
@@ -53,7 +53,7 @@ export const StudentGuideModal: React.FC<StudentGuideModalProps> = ({
             <p className="text-slate-600">
               Kirana stores in India operate on thin margins (10–20%) and often suffer food-waste losses due to expired dairy, bread, and packaged snacks. 
               <strong> Stage 1</strong> builds the essential, rock-solid inventory foundation: live stock counts, shelf-life audit, margin calculations, and low-stock alarms.
-              <strong> Stage 2 (Upcoming)</strong> will integrate machine learning and AI forecasting to predict waste patterns before they happen.
+              <strong> Stage 2 (Active)</strong> adds explainable statistical demand forecasting, reorder recommendations and a waste-risk predictor that flags stock likely to expire unsold.
             </p>
           </section>
 
@@ -209,3 +209,4 @@ export const StudentGuideModal: React.FC<StudentGuideModalProps> = ({
     </div>
   );
 };
+
