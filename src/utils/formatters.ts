@@ -105,3 +105,10 @@ export function getRelativeDate(daysOffset: number): string {
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+
+export function pluralizeUnit(unit: string, qty: number): string {
+  if (qty === 1) return unit;
+  if (unit === 'kg' || unit === 'g' || unit === 'ml') return unit;
+  if (unit === 'box') return 'boxes';
+  return unit + 's';
+}

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { X, ShoppingBag, AlertCircle } from 'lucide-react';
 import { Product } from '../types/inventory';
 import { SaleTransaction } from '../types/demand';
-import { formatINR } from '../utils/formatters';
+import { formatINR, pluralizeUnit } from '../utils/formatters';
 import { formatDateISO } from '../utils/forecasting';
 
 interface RecordSaleModalProps {
@@ -63,7 +63,7 @@ export const RecordSaleModal: React.FC<RecordSaleModalProps> = ({
 
     if (qtyNum > currentProduct.quantity) {
       setError(
-        `Cannot record sale of ${qtyNum} ${currentProduct.unit}s. Only ${currentProduct.quantity} units available in stock.`
+        `Cannot record sale of ${qtyNum} ${pluralizeUnit(currentProduct.unit, qtyNum)}. Only ${currentProduct.quantity} units available in stock.`
       );
       return;
     }
@@ -140,7 +140,7 @@ export const RecordSaleModal: React.FC<RecordSaleModalProps> = ({
             >
               {products.map((p) => (
                 <option key={p.id} value={p.id} disabled={p.quantity <= 0}>
-                  {p.name} — Current Stock: {p.quantity} {p.unit}s ({formatINR(p.sellingPrice)})
+                  {p.name} — Current Stock: {p.quantity} {pluralizeUnit(p.unit, p.quantity)} ({formatINR(p.sellingPrice)})
                   {p.quantity <= 0 ? ' [OUT OF STOCK]' : ''}
                 </option>
               ))}
@@ -153,7 +153,7 @@ export const RecordSaleModal: React.FC<RecordSaleModalProps> = ({
               <div>
                 <span className="text-slate-500">Available Shelf Stock:</span>{' '}
                 <strong className={`tabular-nums ${currentProduct.quantity <= currentProduct.minThreshold ? 'text-amber-700' : 'text-slate-800'}`}>
-                  {currentProduct.quantity} {currentProduct.unit}s
+                  {currentProduct.quantity} {pluralizeUnit(currentProduct.unit, currentProduct.quantity)}
                 </strong>
               </div>
               <div>
@@ -241,3 +241,4 @@ export const RecordSaleModal: React.FC<RecordSaleModalProps> = ({
     </div>
   );
 };
+

@@ -1,7 +1,7 @@
-import React from 'react';
+﻿import React from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { Product } from '../types/inventory';
-import { formatINR } from '../utils/formatters';
+import { formatINR, pluralizeUnit } from '../utils/formatters';
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
             Remove Product from Inventory?
           </h3>
           <p className="text-xs text-slate-500 leading-relaxed mb-4">
-            Are you sure you want to remove <strong className="text-slate-800">{product.name}</strong> ({product.brand})? This item currently has <strong className="text-slate-800">{product.quantity} {product.unit}s</strong> valued at <strong className="text-slate-800">{formatINR(product.purchasePrice * product.quantity)}</strong>.
+            Are you sure you want to remove <strong className="text-slate-800">{product.name}</strong> ({product.brand})? This item currently has <strong className="text-slate-800">{product.quantity} {pluralizeUnit(product.unit, product.quantity)}</strong> valued at <strong className="text-slate-800">{formatINR(product.purchasePrice * product.quantity)}</strong>.
           </p>
 
           <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600 space-y-1 mb-5">
@@ -69,3 +69,4 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
     </div>
   );
 };
+

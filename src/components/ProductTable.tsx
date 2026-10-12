@@ -1,4 +1,5 @@
-import React from 'react';
+﻿import React from 'react';
+import { pluralizeUnit } from '../utils/formatters';
 import { Edit2, Trash2, Plus, Minus, AlertTriangle, Clock, CheckCircle2, XCircle, ShoppingBag } from 'lucide-react';
 import { Product } from '../types/inventory';
 import {
@@ -165,7 +166,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                           {product.quantity}
                         </span>
                         <span className="text-[11px] text-slate-400 ml-1">
-                          {product.unit}s
+                          {pluralizeUnit(product.unit, product.quantity)}
                         </span>
                       </div>
 
@@ -286,3 +287,5 @@ export const ProductTable: React.FC<ProductTableProps> = ({
     </div>
   );
 };
+
+

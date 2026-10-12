@@ -15,7 +15,7 @@ import {
 import { Product } from '../types/inventory';
 import { SaleTransaction, ProductForecast } from '../types/demand';
 import { buildProductForecast } from '../utils/forecasting';
-import { formatINR } from '../utils/formatters';
+import { formatINR, pluralizeUnit } from '../utils/formatters';
 import { calculateWasteRisk } from '../utils/wasteRisk';
 
 interface DemandIntelligenceViewProps {
@@ -267,7 +267,7 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
             >
               {allForecasts.map((f) => (
                 <option key={f.productId} value={f.productId}>
-                  {f.productName} (Stock: {f.currentStock} {f.unit}s)
+                  {f.productName} (Stock: {f.currentStock} {pluralizeUnit(f.unit, f.currentStock)})
                   {f.reorder.recommendedReorder > 0 ? ` — [Order ${f.reorder.recommendedReorder}]` : ''}
                 </option>
               ))}
@@ -279,7 +279,7 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
               <div className="bg-slate-50 border border-slate-200 px-3 py-1 rounded">
                 <span className="text-slate-500 mr-1.5">Selected SKU 7-Day Total:</span>
                 <strong className="text-teal-900 font-bold tabular-nums">
-                  {currentForecast.totalForecastQuantity} {currentForecast.unit}s
+                  {currentForecast.totalForecastQuantity} {pluralizeUnit(currentForecast.unit, currentForecast.totalForecastQuantity)}
                 </strong>
                 <span className="text-slate-400 text-[11px] ml-1.5">
                   ({formatINR(currentForecast.totalForecastQuantity * (products.find(p => p.id === currentForecast.productId)?.sellingPrice || 0))})
@@ -392,7 +392,7 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
                   Exact 7-day sum:{' '}
                   <strong className="text-teal-900">
                     {currentForecast.forecastSeries.map((p) => p.predictedQuantity).join(' + ')} ={' '}
-                    {currentForecast.totalForecastQuantity} {currentForecast.unit}s
+                    {currentForecast.totalForecastQuantity} {pluralizeUnit(currentForecast.unit, currentForecast.totalForecastQuantity)}
                   </strong>
                 </span>
               </div>
@@ -418,10 +418,10 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
                           </td>
                           <td className="py-2.5 px-3 font-mono text-slate-600">{fDay.date}</td>
                           <td className="py-2.5 px-3 text-right font-bold text-teal-900 tabular-nums">
-                            {fDay.predictedQuantity} {currentForecast.unit}s
+                            {fDay.predictedQuantity} {pluralizeUnit(currentForecast.unit, fDay.predictedQuantity)}
                           </td>
                           <td className="py-2.5 px-3 text-right tabular-nums text-slate-500">
-                            [{fDay.lowerBound} to {fDay.upperBound} {currentForecast.unit}s]
+                            [{fDay.lowerBound} to {fDay.upperBound} {pluralizeUnit(currentForecast.unit, fDay.upperBound)}]
                           </td>
                           <td className="py-2.5 px-3 text-right font-semibold tabular-nums text-slate-800">
                             {formatINR(fDay.predictedQuantity * unitPrice)}
@@ -489,7 +489,7 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
                   <div className="pt-1.5 border-t border-slate-200 flex justify-between text-teal-900 font-bold text-xs">
                     <span>Suggested Order Quantity:</span>
                     <span className="tabular-nums">
-                      {currentForecast.reorder.recommendedReorder} {currentForecast.unit}s
+                      {currentForecast.reorder.recommendedReorder} {pluralizeUnit(currentForecast.unit, currentForecast.reorder.recommendedReorder)}
                     </span>
                   </div>
                 </div>
@@ -651,4 +651,5 @@ export const DemandIntelligenceView: React.FC<DemandIntelligenceViewProps> = ({
     </div>
   );
 };
+
 
